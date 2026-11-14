@@ -1,0 +1,61 @@
+{
+  "A/dev": {
+    "strategy": "A",
+    "split": "dev",
+    "N": 18,
+    "hit1_n": 6,
+    "hit3_n": 7,
+    "filter_questions_N": 3,
+    "filter_applied_N": 0,
+    "filter_compliant_n": 0,
+    "failed_ids_hit3": [
+      "q02",
+      "q03",
+      "q05",
+      "q06",
+      "q09",
+      "q11",
+      "q17",
+      "q18",
+      "q19",
+      "q21",
+      "q22"
+    ]
+  },
+  "B/dev": {
+    "strategy": "B",
+    "split": "dev",
+    "N": 18,
+    "hit1_n": 8,
+    "hit3_n": 12,
+    "filter_questions_N": 3,
+    "filter_applied_N": 0,
+    "filter_compliant_n": 0,
+    "failed_ids_hit3": [
+      "q02",
+      "q11",
+      "q18",
+      "q19",
+      "q21",
+      "q22"
+    ]
+  },
+  "C/dev": {
+    "strategy": "C",
+    "split": "dev",
+    "N": 18,
+    "hit1_n": 8,
+    "hit3_n": 12,
+    "filter_questions_N": 3,
+    "filter_applied_N": 3,
+    "filter_compliant_n": 3,
+    "failed_ids_hit3": [
+      "q02",
+      "q11",
+      "q18",
+      "q19",
+      "q21",
+      "q22"
+    ]
+  }
+}

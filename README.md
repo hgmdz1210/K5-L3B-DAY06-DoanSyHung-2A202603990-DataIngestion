@@ -4,6 +4,31 @@
 
 Biến tài liệu thành kho tri thức có thể truy xuất cho AI agent, rồi đo xem cách chuẩn bị dữ liệu nào hiệu quả nhất.
 
+## Bài làm: cách chạy lại
+
+**Corpus:** *Pride and Prejudice* (Project Gutenberg #1342, bản HTML minh họa) tại `data/pg1342-images.html`; 475 trang nội dung (trang in 1–476), 61 chương. Nguồn, giấy phép và quy tắc tính trang: [data/manifest.json](data/manifest.json).
+**Embedding:** OpenAI `text-embedding-3-small` (1536 chiều). **Vector store:** PostgreSQL 16 + pgvector 0.8.7 (Docker), cosine, tìm kiếm chính xác (không dùng index ANN).
+
+```powershell
+cd starter
+python -m venv .venv; .venv\Scripts\Activate.ps1      # đã thử với Python 3.15.2
+python -m pip install -r requirements.txt
+Copy-Item .env.example .env                           # rồi điền OPENAI_API_KEY (không commit .env)
+docker compose -p day6_student_starter up -d --wait
+python scripts/check_setup.py                         # kỳ vọng: Setup OK
+python scripts/validate_benchmark.py                  # kiểm chứng evidence trước khi chạy
+python -m src.run --split dev                         # nạp A/B (idempotent) + chạy 18 câu dev
+python -m src.run --split test --skip-ingest          # 6 câu test, chỉ sau khi đã chốt chiến lược
+```
+
+| Thư mục / file | Nội dung |
+|---|---|
+| `starter/src/` | Pipeline: `ingestion.py`, `chunking.py`, `embeddings.py`, `store.py`, `evaluation.py`, `run.py` |
+| `benchmark/` | 24 câu hỏi (18 dev / 6 test), gold page, evidence, filter; quyết định chốt trước khi chạy |
+| `artifacts/experiment_log.csv` | Tham số, giả thuyết và Hit@1/Hit@3 của A/B/C |
+| `starter/results/` | `traces_*.jsonl` (top-3 đầy đủ), `metrics_*.md/json`, `ingest_runs.jsonl`, `chunk_stats.json` |
+| `starter/results/manual_labels/` | Sheet chấm tay: coherence, metadata audit, grounding |
+
 | 📄 Dữ liệu | 🧩 Chiến lược | 🎯 Benchmark |
 |---|---|---|
 | Tối thiểu **30 trang nội dung** | Tối thiểu **3 cấu hình** | Tối thiểu **20 câu hỏi** |

@@ -1,0 +1,20 @@
+{
+  "A": {
+    "chunk_count": 1667,
+    "total_chars": 742065,
+    "min": 56,
+    "mean": 445.1,
+    "median": 500,
+    "p95": 500,
+    "max": 500
+  },
+  "B": {
+    "chunk_count": 879,
+    "total_chars": 682206,
+    "min": 71,
+    "mean": 776.1,
+    "median": 796,
+    "p95": 1168,
+    "max": 1200
+  }
+}

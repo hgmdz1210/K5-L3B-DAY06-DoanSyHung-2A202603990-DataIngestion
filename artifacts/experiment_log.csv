@@ -1,4 +1,4 @@
 strategy,chunking,chunk_size,overlap,metadata,filter,vectorizer,hypothesis,dev_hit1,dev_hit3,test_hit1,test_hit3,notes
-A,,,,,,,,,,,,
-B,,,,,,,,,,,,
-C,,,,,,,,,,,,
+A,fixed-size characters within one page,500,50,"document_id, source, page, chapter, char span",none,OpenAI text-embedding-3-small (1536 dims; cosine; exact search),"Fixed windows cut sentences and can split the evidence quote across chunks, so A should have the lowest Evidence Hit@3 and coherence; it makes the most chunks.",6/18,7/18,1/6,2/6,Hypothesis written before any run. Own index (strategy A).
+B,paragraph groups within one page,max 1200,0,"document_id, source, page, chapter, char span",none,OpenAI text-embedding-3-small (1536 dims; cosine; exact search),"Paragraph-aware chunks keep passages whole, so B should beat A on Evidence Hit@3 and coherence with fewer chunks. Only the chunking differs from A.",8/18,12/18,3/6,5/6,Own index (strategy B).
+C,same chunks and index as B,max 1200,0,"document_id, source, page, chapter, char span",chapter = N only for questions that state a chapter,OpenAI text-embedding-3-small (1536 dims; cosine; exact search),"Adding a chapter filter should help only on filter questions where near-duplicate scenes exist in other chapters (e.g. Darcy's two proposals, ch.34 vs ch.58); questions without a filter run unfiltered so C should equal B on them. The filter is the only change vs B.",8/18,12/18,4/6,5/6,Reuses B's index; filter value is assumed user-supplied context.

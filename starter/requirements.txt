@@ -1,4 +1,7 @@
-# Core setup and PDF parsing. Choose and install an embedding SDK separately.
+# Database, HTML parsing and the OpenAI embedding SDK used by this project.
+# Tested with Python 3.15.2: openai 2.54.0, beautifulsoup4 4.15.0, psycopg 3.3.8.
 psycopg[binary]==3.3.8
 pypdf>=5,<7
 python-dotenv>=1,<2
+openai>=2,<3
+beautifulsoup4>=4.12,<5
